@@ -7,6 +7,7 @@ interface TraceStep {
   action: string;
   detail: string;
   timestamp: number;
+  txHash?: string;
 }
 
 interface RevealData {
@@ -15,6 +16,8 @@ interface RevealData {
   remaining: number;
   trace: TraceStep[];
 }
+
+const BASESCAN_URL = "https://sepolia.basescan.org/tx/";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -58,6 +61,10 @@ export default function Home() {
     setData(null);
     setTrace([]);
     setError(null);
+  };
+
+  const truncateTxHash = (hash: string) => {
+    return `${hash.slice(0, 10)}...${hash.slice(-8)}`;
   };
 
   return (
@@ -125,7 +132,21 @@ export default function Home() {
                 <span className={`trace-action ${step.action === "Blocked" ? "trace-action-error" : ""}`}>{step.action}</span>
                 <span className="trace-time">+{step.timestamp}ms</span>
               </div>
-              <div className="trace-detail">{step.detail}</div>
+              <div className="trace-detail">
+                {step.detail}
+                {step.txHash && (
+                  <div className="trace-tx">
+                    <a
+                      href={`${BASESCAN_URL}${step.txHash}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="tx-link"
+                    >
+                      {truncateTxHash(step.txHash)}
+                    </a>
+                  </div>
+                )}
+              </div>
             </div>
           ))}
         </div>

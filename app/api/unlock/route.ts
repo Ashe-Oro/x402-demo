@@ -7,18 +7,20 @@ interface TraceStep {
   action: string;
   detail: string;
   timestamp: number;
+  txHash?: string;
 }
 
 export async function POST(req: NextRequest) {
   const trace: TraceStep[] = [];
   const startTime = Date.now();
 
-  const addTrace = (action: string, detail: string) => {
+  const addTrace = (action: string, detail: string, txHash?: string) => {
     trace.push({
       step: trace.length + 1,
       action,
       detail,
       timestamp: Date.now() - startTime,
+      ...(txHash && { txHash }),
     });
   };
 
@@ -92,7 +94,7 @@ export async function POST(req: NextRequest) {
     try {
       const decoded = JSON.parse(atob(paymentResponse));
       if (decoded.transaction) {
-        addTrace("Settled", `TX: ${decoded.transaction.slice(0, 10)}...${decoded.transaction.slice(-8)}`);
+        addTrace("Settled", "Transaction confirmed on Base Sepolia", decoded.transaction);
       }
     } catch {
       // Ignore parsing errors

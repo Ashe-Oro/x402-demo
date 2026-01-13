@@ -307,6 +307,34 @@ h1 {
   color: #f44 !important;
 }
 
+/* Transaction link */
+.trace-tx {
+  margin-top: 0.25rem;
+}
+
+.tx-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #0070f3;
+  text-decoration: none;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  background: rgba(0, 112, 243, 0.1);
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.tx-link:hover {
+  background: rgba(0, 112, 243, 0.2);
+  text-decoration: underline;
+}
+
+.tx-link::before {
+  content: "↗";
+  font-size: 0.7rem;
+}
+
 @media (max-width: 800px) {
   .layout {
     flex-direction: column;
