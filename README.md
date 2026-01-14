@@ -46,6 +46,26 @@ When x402 is disabled, the trace shows:
 - **Blocked** - Cannot complete payment
 - **Failed** - Access denied
 
+### Screenshots
+
+#### Successful Payment Flow
+
+With x402 enabled, the payment completes automatically and the secret content is revealed:
+
+<p align="center">
+  <img src="successful-payment.png" alt="Successful payment - content unlocked" width="350">
+  <img src="successful-payment-trace.png" alt="Successful payment trace" width="350">
+</p>
+
+#### Unsuccessful Payment Flow
+
+With x402 disabled, the request is blocked at the 402 response and access is denied:
+
+<p align="center">
+  <img src="unsuccessful-payment.png" alt="Unsuccessful payment - access denied" width="350">
+  <img src="unsuccessful-payment-trace.png" alt="Unsuccessful payment trace" width="350">
+</p>
+
 ---
 
 ## How It Works
