@@ -120,3 +120,36 @@ MAX_DAILY_UNLOCKS=50          # Rate limit
 - **Network:** Base Sepolia (testnet)
 - **Currency:** USDC
 - **Facilitator:** https://x402.org/facilitator
+
+---
+
+## Claude Code Skill
+
+This repo includes a [SKILL.md](SKILL.md) for managing Base wallets in Claude Code.
+
+### Why?
+
+Claude doesn't know about `npx add-wallet` or how to fund Base Sepolia wallets. Without the skill, asking "add testnet USDC to my wallet" would get suggestions for faucets or manual steps. The skill teaches Claude the right tool for the job.
+
+### Setup
+
+Add to your Claude Code settings (`.claude/settings.json` or via `/settings`):
+
+```json
+{
+  "skills": ["/path/to/x402-demo/SKILL.md"]
+}
+```
+
+### Usage
+
+Once configured, you can use natural language:
+
+```
+> /base-wallet fund 0x1234...
+> "top up my buyer wallet with testnet USDC"
+> "check my wallet balance"
+> "create a new wallet for testing"
+```
+
+See [SKILL.md](SKILL.md) for full command reference.
